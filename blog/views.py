@@ -5,8 +5,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 def post_list(request):
-    Post.objects.order_by('created_date')
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_detail(request, pk):
