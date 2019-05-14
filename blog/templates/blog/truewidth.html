@@ -1,9 +1,26 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+{% load widget_tweaks %}
     <h2>True Width Calculator</h2>
     <form method="POST" class="thick-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+	
+        {% for hidden in form.hidden_fields %}
+  {{ hidden }}
+{% endfor %}
+
+{% for field in form.visible_fields %}
+  <div class="form-group">
+    <p><label for="{{ field.id_for_label }}">{{ field.label }}</label></p>
+   <p> {{ field }}</p>
+    {% for error in field.errors %}
+      <span class="help-block">{{ error }}</span>
+    {% endfor %}
+  </div>
+{% endfor %}
+<div class="pull-left">
+<button type="submit" class="save btn btn-success">Calculate</button>
+</div>
+        
     </form>
 {% endblock %}

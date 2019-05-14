@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from bokeh.core.properties import List, String, Dict, Int
+from bokeh.models import LayoutDOM
 
 
 class Post(models.Model):
@@ -20,4 +22,4 @@ class Post(models.Model):
 class thick(models.Model):
         angle = models.FloatField()
         dhthick = models.FloatField()
-        
+       
