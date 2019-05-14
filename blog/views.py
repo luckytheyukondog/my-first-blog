@@ -4,9 +4,7 @@ from .forms import PostForm, ThicknessForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from calculator import calc
-from bokeh.plotting import figure
-from bokeh.resources import CDN
-from bokeh.embed import components
+
 
 def post_list(request):
     posts = Post.objects.all().order_by('-published_date')
@@ -59,14 +57,5 @@ def thickness_calc(request):
         form = ThicknessForm()
     return render(request, 'blog/truewidth.html', {'form': form})
 
-def simple_chart(request):
-    plot = figure()
-    plot.circle([1,2],[3,4])
-    plot.line([1,3],[1,3], color='blue', legend='line')
-    plot.legend.click_policy='hide'
-    
-    script, div = components(plot, CDN)
-    return render (request, "blog/simple_chart.html",{"the_script":script, "the_div":div})
-            
-            
+
             
